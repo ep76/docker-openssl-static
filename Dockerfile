@@ -31,5 +31,5 @@ RUN \
 
 FROM scratch AS openssl-static
 LABEL maintainer="https://github.com/ep76/openssl-static"
-COPY --from=openssl-builder /openssl /usr
+COPY --from=builder /openssl /usr
 ENTRYPOINT [ "/usr/bin/openssl" ]
