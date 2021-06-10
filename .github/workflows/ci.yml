@@ -5,9 +5,6 @@ on:
     branches:
       - main
       - v3
-    paths:
-      - Dockerfile
-      - tests/**
   pull_request:
   workflow_dispatch:
 
@@ -45,29 +42,20 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ hashFiles('Dockerfile') }}
           restore-keys: ${{ runner.os }}-buildx-
 
-      - name: Build (openssl-builder)
+      - name: Build and test openssl
         uses: docker/build-push-action@v2
         with:
-          target: openssl-builder
+          target: tester
           platforms: ${{ env.platforms }}
-          tags: ${{ format(steps.meta.outputs.tags, 'openssl-builder') }}
           context: .
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
-          push: true
+          push: false
 
-      - name: Test (openssl-builder)
-        run: |
-          for platform in $(echo ${{ env.platforms }} | tr ',' ' '); do
-            echo "Testing ${platform}"
-            docker run -i --platform=${platform} --rm \
-              "${{ format(steps.meta.outputs.tags, 'openssl-builder') }}" \
-              < tests/openssl-builder.sh
-          done
-
-      - name: Build
+      - name: Build the image
         uses: docker/build-push-action@v2
         with:
+          target: openssl-static
           platforms: ${{ env.platforms }}
           tags: ${{ format(steps.meta.outputs.tags, 'openssl-static') }}
           context: .
@@ -75,7 +63,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           push: true
 
-      - name: Test
+      - name: Test the image
         run: |
           for platform in $(echo ${{ env.platforms }} | tr ',' ' '); do
             echo "Testing ${platform}"

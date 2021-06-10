@@ -1,4 +1,4 @@
-FROM alpine:3.13 AS openssl-builder
+FROM alpine:3.13 AS builder
 ARG openssl_url=https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1k.tar.gz
 RUN \
   apk add --no-cache \
@@ -20,7 +20,16 @@ RUN \
     && \
   make install_sw INSTALLTOP=/openssl
 
-FROM scratch
+FROM builder AS tester
+RUN \
+  cd /tmp && \
+  ./configdata.pm --command-line | sed 's/no-tests//p;d' | sh && \
+  touch -r config configdata.pm && \
+  # https://github.com/openssl/openssl/issues/12242
+  if uname -m | grep -qE 'armv7l|aarch64'; then TESTS=-test_afalg; fi && \
+  make test TESTS=${TESTS:-alltests}
+
+FROM scratch AS openssl-static
 LABEL maintainer="https://github.com/ep76/openssl-static"
 COPY --from=openssl-builder /openssl /usr
 ENTRYPOINT [ "/usr/bin/openssl" ]
