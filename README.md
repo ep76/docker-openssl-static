@@ -6,7 +6,7 @@
 [![CI](https://github.com/ep76/openssl-static/actions/workflows/ci.yml/badge.svg?branch=v3)](
   https://github.com/ep76/openssl-static/actions/workflows/ci.yml
 )
-[![DockerHub](https://img.shields.io/docker/v/ep76/openssl-static/latest)](
+[![DockerHub](https://img.shields.io/docker/v/ep76/openssl-static/3)](
   https://hub.docker.com/r/ep76/openssl-static/tags?page=1&ordering=last_updated
 )
 
