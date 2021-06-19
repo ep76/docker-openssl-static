@@ -3,7 +3,7 @@
 > A Docker image for [OpenSSL](https://www.openssl.org),
 > statically compiled with `musl`
 
-[![CI](https://github.com/ep76/openssl-static/actions/workflows/ci.yml/badge.svg?branch=main)](
+[![CI](https://github.com/ep76/openssl-static/actions/workflows/ci.yml/badge.svg?branch=v3)](
   https://github.com/ep76/openssl-static/actions/workflows/ci.yml
 )
 [![DockerHub](https://img.shields.io/docker/v/ep76/openssl-static/latest)](

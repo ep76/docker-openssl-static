@@ -1,5 +1,5 @@
 FROM alpine:3.13 AS builder
-ARG openssl_url=https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1k.tar.gz
+ARG openssl_url=https://github.com/openssl/openssl/archive/refs/tags/openssl-3.0.0-beta1.tar.gz
 RUN \
   apk add --no-cache \
     curl \
