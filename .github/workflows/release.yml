@@ -24,6 +24,7 @@ jobs:
             type=match,pattern=\d+
             type=match,pattern=\d+\.\d+
             type=match,pattern=\d+\.\d+\.\d+
+          flavor: latest=${{ startsWith(github.ref, 'refs/tags/1.') }}
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
