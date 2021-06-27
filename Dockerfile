@@ -24,10 +24,9 @@ FROM builder AS tester
 RUN \
   cd /tmp && \
   ./configdata.pm --command-line | sed 's/no-tests//p;d' | sh && \
-  touch -r config configdata.pm && \
   # https://github.com/openssl/openssl/issues/12242
   if uname -m | grep -qE 'armv7l|aarch64'; then TESTS=-test_afalg; fi && \
-  make test TESTS=${TESTS:-alltests}
+  make -o configdata.pm test TESTS=${TESTS:-alltests}
 
 FROM scratch AS openssl-static
 LABEL maintainer="https://github.com/ep76/openssl-static"
