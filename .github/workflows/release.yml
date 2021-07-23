@@ -5,7 +5,7 @@ on:
     branches:
       - '!**'
     tags:
-      - '*'
+      - '**'
 
 jobs:
   release:
@@ -18,7 +18,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ github.repository }}
+          images: ${{ github.repository_owner }}/${{ env.target }}
           tags: |
             type=ref,event=tag
             type=match,pattern=\d+
@@ -62,3 +62,4 @@ jobs:
 
 env:
   platforms: linux/amd64, linux/arm64, linux/arm/v7
+  target: openssl-static
