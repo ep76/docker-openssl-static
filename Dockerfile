@@ -29,6 +29,6 @@ RUN \
   make -o configdata.pm test TESTS=${TESTS:-alltests}
 
 FROM scratch AS openssl-static
-LABEL maintainer="https://github.com/ep76/openssl-static"
+LABEL maintainer="https://github.com/ep76/docker-openssl-static"
 COPY --from=builder /openssl /usr
 ENTRYPOINT [ "/usr/bin/openssl" ]
