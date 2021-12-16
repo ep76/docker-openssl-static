@@ -1,4 +1,4 @@
-FROM alpine:3.14 AS builder
+FROM alpine:3.15 AS builder
 ARG openssl_url=https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1l.tar.gz
 RUN \
   apk add --no-cache \
