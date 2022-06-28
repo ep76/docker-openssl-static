@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - v3
+    paths:
+      - Dockerfile
     tags:
       - '!**'
   workflow_dispatch:
