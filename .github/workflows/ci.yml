@@ -7,12 +7,12 @@ on:
       - v3
     tags:
       - '!**'
-  pull_request:
   workflow_dispatch:
 
 jobs:
   ci:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged != true
     services:
       registry:
         image: registry:2
