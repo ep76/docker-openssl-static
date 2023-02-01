@@ -47,7 +47,7 @@ jobs:
           restore-keys: ${{ runner.os }}-buildx-
 
       - name: Build and test
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           target: tester
           platforms: ${{ env.platforms }}
@@ -57,7 +57,7 @@ jobs:
           push: false
 
       - name: Build the image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           target: ${{ env.target }}
           platforms: ${{ env.platforms }}
